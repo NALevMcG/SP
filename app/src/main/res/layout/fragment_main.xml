@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#000000">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:weightSum="1">
+
+        <Button
+            android:id="@+id/mapButton"
+            android:layout_width="match_parent"
+            android:layout_height="123dp"
+            android:text="Maps"
+            android:fontFamily="casual"
+            android:textSize="20dp"
+            android:drawableLeft="@drawable/mapbuttondraw"
+            />
+
+        <Button
+            android:id="@+id/pofButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.27"
+            android:text="Places of Interest"
+            android:fontFamily="casual"
+            android:textSize="20dp"
+            android:drawableLeft="@drawable/pofbuttondraw"
+            />
+
+        <Button
+            android:id="@+id/cButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.28"
+            android:text="Campus Photos"
+            android:fontFamily="casual"
+            android:textSize="20dp"
+            android:drawableLeft="@drawable/slideshowdraw"
+            />
+
+        <Button
+            android:id="@+id/weatherButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.26"
+            android:text="Weather"
+            android:fontFamily="casual"
+            android:textSize="20dp"
+            android:drawableLeft="@drawable/weatherbuttondraw"
+            />
+    </LinearLayout>
+</RelativeLayout>

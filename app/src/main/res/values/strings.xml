@@ -1,0 +1,40 @@
+<resources>
+    <string name="app_name">The Plymouth Way</string>
+    <string name="title_activity_plymouth">the Plymouth Way</string>
+    <string name="title_activity_front_page">The Plymouth Way</string>
+    <string name="button_send">Continue</string>
+    <string name="title_activity_main_drawer">The Plymouth Way</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="string_one">Maps</string>
+    <string name="string_two">Cool Spots</string>
+    <string name="string_three">Weather</string>
+    <string name="string_four">Pictures</string>
+
+    <string name="temperature">Temperature</string>
+    <string name="condition">Condition</string>
+    <string name="location">Location</string>
+
+    <string name="open_weather_maps_app_id">df05b34b68d3fdc053e585fac8477abc</string>
+
+    <string name="weather_sunny">&#xf00d;</string>
+    <string name="weather_clear_night">&#xf02e;</string>
+
+    <string name="weather_foggy">&#xf014;</string>
+    <string name="weather_cloudy">&#xf013;</string>
+    <string name="weather_rainy">&#xf019;</string>
+    <string name="weather_snowy">&#xf01b;</string>
+    <string name="weather_thunder">&#xf01e;</string>
+    <string name="weather_drizzle">&#xf01c;</string>
+
+    <string name="weather_title"> Weather </string>
+    <string name="map_title">Map</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+</resources>

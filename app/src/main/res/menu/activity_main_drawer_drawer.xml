@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_gallery"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Maps"
+            android:fontFamily="casual"
+            />
+        <item
+            android:id="@+id/spots"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Cool Spots"
+            android:fontFamily="casual"
+            />
+        <item
+            android:id="@+id/nav_slideshow"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Slideshow"
+            android:fontFamily="casual"
+            />
+        <item
+            android:id="@+id/weather"
+            android:icon="?android:attr/textSelectHandle"
+            android:title="Weather"
+            android:fontFamily="casual"
+            />
+    </group>
+
+
+</menu>

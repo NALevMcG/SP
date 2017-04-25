@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "482613631332",
+    "firebase_url": "https://panther-way.firebaseio.com",
+    "project_id": "panther-way",
+    "storage_bucket": "panther-way.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:482613631332:android:2aa7b22018204f20",
+        "android_client_info": {
+          "package_name": "com.example.nicklevesque.thepanthertour"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "482613631332-2ji0eui34tdh24alo739vij1ufbj0mb3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPSLjX4h7r06ovuWi8xf2J_LDh6OM9X3A"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ViewSwitcher
+        android:id="@+id/simpleViewSwitcher"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/view1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="#000000"
+            >
+
+            <Button
+                android:id="@+id/mountainButton"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.33"
+                android:fontFamily="casual"
+                android:text="Trails/Hiking"
+                android:textSize="20sp"
+
+                />
+
+            <Button
+                android:id="@+id/campingButton"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.33"
+                android:fontFamily="casual"
+                android:text="Camping"
+                android:textSize="20sp" />
+
+            <Button
+                android:id="@+id/bridgeButton"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.33"
+                android:fontFamily="casual"
+                android:text="Covered Bridges"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <ScrollView
+            android:id="@+id/view2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="#000000"
+                >
+
+                <Button
+                    android:id="@+id/plymouthMountain"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="casual"
+                    android:text="Plymouth Mountain" />
+
+                <Button
+                    android:id="@+id/rainbowFalls"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="casual"
+                    android:text="Rainbow Falls" />
+
+                <Button
+                    android:id="@+id/rattleSnake"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="casual"
+                    android:text="RattleSnake Mountain" />
+
+                <Button
+                    android:id="@+id/whittenWoods"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="casual"
+                    android:text="Whitten Woods Trailhead" />
+
+                <Button
+                    android:id="@+id/flumeGorge"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="casual"
+                    android:text="The Flume Gorge" />
+
+                <Button
+                    android:id="@+id/peakedHill"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="casual"
+                    android:text="Peaked Hill Pond Trailhead" />
+
+                <Button
+                    android:id="@+id/welchandDicky"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="casual"
+                    android:text="Welch and Dickey Trailhead" />
+
+                <Button
+                    android:id="@+id/mountCiley"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="casual"
+                    android:text="Mount Ciley Trailhead" />
+
+                <Button
+                    android:id="@+id/polarCaves"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="casual"
+                    android:text="Polar Caves" />
+
+                <Button
+                    android:id="@+id/champney"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="casual"
+                    android:text="Champney Falls Trailhead" />
+
+                <Button
+                    android:id="@+id/lostRiver"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="casual"
+                    android:text="Lost River Gorge and Boulder Caves" />
+                <Button
+                    android:id="@+id/plymouthMountain"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="casual"
+                    android:text="Plymouth Mountain" />
+                <Button
+                    android:id="@+id/plymouthMountain"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="casual"
+                    android:text="Plymouth Mountain" />
+
+                <Button
+                    android:id="@+id/plymouthMountain"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="casual"
+                    android:text="Plymouth Mountain" />
+
+                <Button
+                    android:id="@+id/plymouthMountain"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="casual"
+                    android:text="Plymouth Mountain" />
+
+                <Button
+                    android:id="@+id/plymouthMountain"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="casual"
+                    android:text="Plymouth Mountain" />
+
+
+            </LinearLayout>
+        </ScrollView>
+
+    </ViewSwitcher>
+</LinearLayout>
