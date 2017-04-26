@@ -9,11 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.nicklevesque.thepanthertour.R;
-import com.google.android.gms.maps.MapFragment;
-import com.google.android.gms.maps.SupportMapFragment;
-
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
 import android.widget.Button;
 
 
@@ -22,6 +17,8 @@ import android.widget.Button;
 
 /**
  * Created by nicklevesque on 4/7/17.
+ * Fragment associated with the Home part of my app,
+ * links to ListFragment, MapsFragment, WeatherFragment and SlideShowFrqgment
  */
 public class MainFragment extends Fragment {
 

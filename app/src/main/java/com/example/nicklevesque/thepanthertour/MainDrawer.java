@@ -54,6 +54,11 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * MainDrawer activity that holds all of my fragments and
+ * transitions to them accordingly via side bar or home page
+ */
+
 public class MainDrawer extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
 

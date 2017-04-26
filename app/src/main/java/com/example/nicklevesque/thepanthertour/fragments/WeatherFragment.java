@@ -5,7 +5,6 @@ import android.app.Fragment;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.view.GravityCompat;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -14,7 +13,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.nicklevesque.thepanthertour.R;
-import com.example.nicklevesque.thepanthertour.RemoteFetch;
+import com.example.nicklevesque.thepanthertour.WeatherJSON;
 
 import org.json.JSONObject;
 
@@ -24,15 +23,15 @@ import java.util.Locale;
 
 /**
  * Created by ntlevesque on 3/10/17.
+ *
  */
 
 public class WeatherFragment extends Fragment {
 
 
-
-
     Typeface wF;
 
+    //TextView variables to store and display our information
     TextView cF;
     TextView uF;
     TextView dF;
@@ -41,6 +40,7 @@ public class WeatherFragment extends Fragment {
 
     Handler handler;
 
+    //Constructor
     public WeatherFragment(){
         handler = new Handler();
     }
@@ -59,6 +59,7 @@ public class WeatherFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.weather_frag, container, false);
+        //Initiate all of my textviews to populate them with the data we receive from the JSON object
         cF = (TextView)rootView.findViewById(R.id.city_field);
         uF = (TextView)rootView.findViewById(R.id.updated_field);
         dF = (TextView)rootView.findViewById(R.id.details_field);
@@ -70,22 +71,12 @@ public class WeatherFragment extends Fragment {
     }
 
 
-    public boolean onKeyDown(int keyCode, KeyEvent event){
-        if(keyCode==KeyEvent.KEYCODE_BACK) {
-            MapsFragment mFrag = new MapsFragment();
-            getActivity().getFragmentManager().beginTransaction().replace(R.id.main_drawer, mFrag).commit();
-        }
-        return true;
-    }
-
-
-
 
     /* method used to continuously update weather for specific city (Plymouth) when it is available*/
     private void updateWeatherData(final String city){
         new Thread(){
             public void run(){
-                final JSONObject json = RemoteFetch.getJSON(getActivity(), city);
+                final JSONObject json = WeatherJSON.getJSON(getActivity(), city);
                 if(json != null){
                     handler.post(new Runnable(){
                         public void run(){
@@ -100,7 +91,7 @@ public class WeatherFragment extends Fragment {
     }
 
     /*
-    Method used to render the data we obtained from the RemoteFetch Class, We use a try catch statement
+    Method used to render the data we obtained from the WeatherJSON Class, We use a try catch statement
     here to ensure that we arent missing any data provided from Openweathermap.org, if we are, thrown an error message
     if not, assign each textview with the corresponding data
       */
@@ -109,6 +100,7 @@ public class WeatherFragment extends Fragment {
             cF.setText(json.getString("name").toUpperCase(Locale.US) +
                     ", " +
                     json.getJSONObject("sys").getString("country"));
+
 
             JSONObject details = json.getJSONArray("weather").getJSONObject(0);
             JSONObject main = json.getJSONObject("main");

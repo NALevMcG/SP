@@ -28,6 +28,7 @@ public class SlideShowFragment extends Fragment {
 
     }
 
+    //creates and returns the view hierarchy associated with the fragment. returns the rootView
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

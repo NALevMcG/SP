@@ -10,7 +10,11 @@ import org.json.JSONObject;
 import android.content.Context;
 import android.util.Log;
 
-public class RemoteFetch {
+/**
+ * Created by nicklevesque on 3/11/17
+ *Class used to fetch JSON data from OpenWeatherMap web services
+ */
+public class WeatherJSON {
 
     private static final String OPEN_WEATHER_MAP_API =
             "http://api.openweathermap.org/data/2.5/weather?q=%s&units=metric";

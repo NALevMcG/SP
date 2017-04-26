@@ -41,6 +41,9 @@ import java.util.List;
 
 import static com.example.nicklevesque.thepanthertour.R.id.toolbar;
 
+/**
+ * Created by nicklevesque 3/14/17
+ */
 
 public class MapsFragment extends Fragment implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,

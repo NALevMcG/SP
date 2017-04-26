@@ -15,6 +15,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+/**
+created by ntlevesque on 2/24/17
+ Activity associated with the frontpage of my app
+ */
 public class FrontPage extends AppCompatActivity {
 
     public void onAttachedToWindow() {
@@ -29,20 +33,22 @@ public class FrontPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_front_page);
         StartAnimations();
+
     }
 
+    /* Method that starts and finishes my animated splashscreen at the beginning*/
     private void StartAnimations() {
-        Animation anim = AnimationUtils.loadAnimation(this, R.anim.alpha);
-        anim.reset();
+        Animation animation = AnimationUtils.loadAnimation(this, R.anim.alpha);
+        animation.reset();
         LinearLayout l=(LinearLayout) findViewById(R.id.lin_lay);
         l.clearAnimation();
-        l.startAnimation(anim);
+        l.startAnimation(animation);
 
-        anim = AnimationUtils.loadAnimation(this, R.anim.translate);
-        anim.reset();
+        animation = AnimationUtils.loadAnimation(this, R.anim.translate);
+        animation.reset();
         ImageView iv = (ImageView) findViewById(R.id.splash);
         iv.clearAnimation();
-        iv.startAnimation(anim);
+        iv.startAnimation(animation);
 
         Thread splashTread = new Thread() {
             @Override
@@ -54,6 +60,7 @@ public class FrontPage extends AppCompatActivity {
                         sleep(100);
                         waited += 100;
                     }
+                    //start next activity once the splashscreen is done
                     Intent intent = new Intent(FrontPage.this,
                             MainDrawer.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
@@ -69,16 +76,6 @@ public class FrontPage extends AppCompatActivity {
         };
         splashTread.start();
 
-    }
-
-
-
-
-
-    /* Called when the user clicks the Send button, Launches the MainDrawer Activity */
-    public void sendMessage(View view) {
-        Intent intent = new Intent(this, MainDrawer.class);
-        startActivity(intent);
     }
 
 }

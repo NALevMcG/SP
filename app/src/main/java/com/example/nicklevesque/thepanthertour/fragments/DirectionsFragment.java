@@ -55,6 +55,7 @@ public class DirectionsFragment extends Fragment implements OnMapReadyCallback,
         GoogleApiClient.OnConnectionFailedListener,
         LocationListener {
 
+    //Initiate variables
     private GoogleMap mMap;
     GoogleApiClient mGoogleApiClient;
     Marker mCurrLocationMarker;
