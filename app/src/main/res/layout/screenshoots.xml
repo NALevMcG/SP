@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1">
 
     <ImageView
         android:layout_width="match_parent"
@@ -10,5 +12,24 @@
         android:adjustViewBounds="true"
         android:scaleType="centerCrop"
         />
+    <TextView
+        android:id="@+id/slideshowText"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:text="Rounds Hall"
+        android:textColor="#ffffff"
+        android:fontFamily="casual"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:layout_above="@+id/textView" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="417dp"
+        android:layout_height="0dp"
+        android:fontFamily="casual"
+        android:text="Academic Hall"
+        android:textAlignment="center"
+        android:textColor="#ffffff" />
 
 </LinearLayout>

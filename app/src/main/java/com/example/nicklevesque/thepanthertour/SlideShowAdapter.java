@@ -34,7 +34,7 @@ public class SlideShowAdapter extends PagerAdapter {
     //Constructor
     public SlideShowAdapter(Context context, List<Names> items){
         this.context = context;
-        this.items=items;
+        this.items = items;
     }
 
     /*Method that returns length of the images_resource array*/
@@ -65,8 +65,8 @@ public class SlideShowAdapter extends PagerAdapter {
 
         Names name = items.get(position);
 
-        topTextItem.setText(name.hall);
-        bottomTextItem.setText(name.name);
+        topTextItem.setText("bah");
+        bottomTextItem.setText("bah");
 
 
         iv.setImageResource(image_resources[position]);
