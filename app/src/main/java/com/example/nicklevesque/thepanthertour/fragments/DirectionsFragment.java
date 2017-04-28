@@ -485,6 +485,7 @@ public class DirectionsFragment extends Fragment implements OnMapReadyCallback,
             @Override
             public void onClick(View v) {
 
+                button.setVisibility(View.INVISIBLE);
                 //coordinates of both your lattitude and longitude as well as the destinations
                 LatLng origin = new LatLng(currentLatitude, currentLongitude);
                 LatLng dest = new LatLng(destLatitude,destLongitude);

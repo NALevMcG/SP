@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title="Legend">
+        <menu>
+            <group android:checkableBehavior="all" >
+                <item
+                    android:title="Academic Halls"
+                    android:id="@+id/academic_halls"
+                    android:checked="true"
+                    android:checkable="true" />
+
+                <item
+                    android:id="@+id/res_halls"
+                    android:title="Residential Halls"
+                    android:checked="true"
+                    android:checkable="true"
+                />
+                <item
+                    android:id="@+id/dining_halls"
+                    android:title="Dining Halls"
+                    android:checked="true"
+                    android:checkable="true"
+                    />
+
+            </group>
+        </menu>
+    </item>
+</menu>

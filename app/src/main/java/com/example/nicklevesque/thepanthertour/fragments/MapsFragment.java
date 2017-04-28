@@ -3,6 +3,7 @@ package com.example.nicklevesque.thepanthertour.fragments;
 //Imports
 import android.Manifest;
 import android.app.Fragment;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -14,7 +15,11 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -39,6 +44,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.content.ContentValues.TAG;
 import static com.example.nicklevesque.thepanthertour.R.id.toolbar;
 
 /**
@@ -60,6 +66,12 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
     //LocationRequest object used to to request the location of the user
     LocationRequest mLocationRequest;
 
+    List<Marker> resHalls = new ArrayList<Marker>();
+    List<Marker> dining = new ArrayList<Marker>();
+    List<Marker> academicBuildings = new ArrayList<Marker>();
+
+
+
     SupportMapFragment mapFragment;
 
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
@@ -69,6 +81,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
         super.onCreate(savedInstanceState);
         mapFragment = SupportMapFragment.newInstance();
         mapFragment.getMapAsync(this);
+        setHasOptionsMenu(true);
 
 
     }
@@ -167,10 +180,75 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
         }
     }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        menu.clear();
+        inflater.inflate(R.menu.settings_layout, menu);
+
+        super.onCreateOptionsMenu(menu, inflater);
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+
+        if (item.isChecked()) {
+            item.setChecked(false);
+        } else {
+            item.setChecked(true);
+        }
+
+        switch (id) {
+            case R.id.academic_halls:
+                if (item.isChecked()) {
+                    for (int i = 0; i < academicBuildings.size() + 3; i++) {
+                        academicBuildings.get(i).setVisible(true);
+                    }
+                } else {
+                    for (int i = 0; i < academicBuildings.size(); i++) {
+                        academicBuildings.get(i).setVisible(false);
+                    }
+
+                }
+                //Toast.makeText(getActivity(), "Calls Icon Click", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.res_halls:
+                if (item.isChecked()) {
+                    for (int i = 0; i < resHalls.size(); i++) {
+                        resHalls.get(i).setVisible(true);
+                    }
+                } else {
+                    for (int i = 0; i < resHalls.size(); i++) {
+                        resHalls.get(i).setVisible(false);
+                    }
+
+                    //Toast.makeText(getActivity(), "Calls Show Click", Toast.LENGTH_SHORT).show();
+
+                    break;
+                }
+            case R.id.dining_halls:
+                if (item.isChecked()) {
+                    for (int i = 0; i < dining.size(); i++) {
+                        dining.get(i).setVisible(true);
+                    }
+                } else {
+                    for (int i = 0; i < dining.size(); i++) {
+                        dining.get(i).setVisible(false);
+                    }
+
+                    break;
+                }
+        }
+        return false;
+
+    }
     /*After calling connect(), this method will be invoked asynchronously when the connect request has successfully completed.
     Here we request the location of the user, set how fast the location updates, and how accurate we want the location to be.
     Lastly, we check if Location permissions have been granted(I know this is a bit redundant in many methods but android forces you to do it now)
      */
+
     @Override
     public void onConnected(@Nullable Bundle bundle) {
         mLocationRequest = new LocationRequest();
@@ -259,7 +337,6 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
 
 
         //List of all residential hall markers markers
-        List<Marker> resHalls = new ArrayList<Marker>();
         Marker smith = mMap.addMarker(new MarkerOptions().position(new LatLng(43.760895, -71.689809)).title("Smith").snippet("Residential Hall").icon(BitmapDescriptorFactory.fromBitmap(smallreshallMarker)));
         Marker grafton = mMap.addMarker(new MarkerOptions().position(new LatLng(43.760945, -71.688570)).title("Grafton").snippet("Residential Hall").icon(BitmapDescriptorFactory.fromBitmap(smallreshallMarker)));
         Marker langdonWoods = mMap.addMarker(new MarkerOptions().position(new LatLng(43.765137, -71.689239)).title("Langdon Woods").snippet("Residential Hall").icon(BitmapDescriptorFactory.fromBitmap(smallreshallMarker)));
@@ -284,7 +361,6 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
 
 
         //List of all dining Markers on campus
-        List<Marker> dining = new ArrayList<Marker>();
         Marker prospect = mMap.addMarker(new MarkerOptions().position(new LatLng(43.760684, -71.689338)).title("Prospect").snippet("Dining Area").icon(BitmapDescriptorFactory.fromBitmap(smalldiningMarker)));
         Marker unionGrill = mMap.addMarker(new MarkerOptions().position(new LatLng(43.760181, -71.690109)).title("Union Grill").snippet("Dining Area").icon(BitmapDescriptorFactory.fromBitmap(smalldiningMarker)));
         Marker commonsCafe = mMap.addMarker(new MarkerOptions().position(new LatLng(43.757634, -71.691078)).title("Commons Cafe").snippet("Dining Area").icon(BitmapDescriptorFactory.fromBitmap(smalldiningMarker)));
@@ -297,7 +373,6 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
 
 
         //List of all Academic markers on campus
-        List<Marker> academicBuildings = new ArrayList<Marker>();
         Marker rounds = mMap.addMarker(new MarkerOptions().position(new LatLng(43.759533, -71.688379)).title("Rounds").snippet("Academic Hall").icon(BitmapDescriptorFactory.fromBitmap(smallacademicMarker)));
         Marker Hyde = mMap.addMarker(new MarkerOptions().position(new LatLng(43.761506, -71.690463)).title("Hyde").snippet("Academic Hall").icon(BitmapDescriptorFactory.fromBitmap(smallacademicMarker)));
         Marker memorial = mMap.addMarker(new MarkerOptions().position(new LatLng(43.759440, -71.689639)).title("Memorial").snippet("Academic Hall").icon(BitmapDescriptorFactory.fromBitmap(smallacademicMarker)));
