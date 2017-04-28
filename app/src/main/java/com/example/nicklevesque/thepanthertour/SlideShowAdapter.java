@@ -65,8 +65,8 @@ public class SlideShowAdapter extends PagerAdapter {
 
         Names name = items.get(position);
 
-        topTextItem.setText("bah");
-        bottomTextItem.setText("bah");
+        topTextItem.setText(name.name);
+        bottomTextItem.setText(name.hall);
 
 
         iv.setImageResource(image_resources[position]);

@@ -18,6 +18,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.nicklevesque.thepanthertour.DataDirectionsParser;
@@ -34,6 +36,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 
 import org.json.JSONObject;
@@ -65,7 +68,9 @@ public class DirectionsFragment extends Fragment implements OnMapReadyCallback,
     private double currentLongitude;
     private double destLatitude;
     private double destLongitude;
-
+    private Button button;
+    TextView Distance;
+    TextView Duration;
 
 
     @Override
@@ -91,13 +96,20 @@ public class DirectionsFragment extends Fragment implements OnMapReadyCallback,
         mapFragment = SupportMapFragment.newInstance();
         mapFragment.getMapAsync(this);
 
+
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.fragment_directions, container, false);
+        button = (Button) rootView.findViewById(R.id.routeButton);
+        Distance = (TextView) rootView.findViewById(R.id.distance);
+        Duration = (TextView) rootView.findViewById(R.id.duration);
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_directions, container, false);
+        return rootView;
 
     }
     public void onViewCreated(View view, Bundle savedInstanceState){
@@ -244,6 +256,8 @@ public class DirectionsFragment extends Fragment implements OnMapReadyCallback,
         protected void onPostExecute(List<List<HashMap<String, String>>> result) {
             ArrayList<LatLng> points;
             PolylineOptions lineOptions = null;
+            String distance = "Blah";
+            String duration = "Blah";
 
             // Traversing through all the routes
             for (int i = 0; i < result.size(); i++) {
@@ -256,6 +270,14 @@ public class DirectionsFragment extends Fragment implements OnMapReadyCallback,
                 // Fetching all the points in i-th route
                 for (int j = 0; j < path.size(); j++) {
                     HashMap<String, String> point = path.get(j);
+
+                    if (j == 0) {    // Get distance from the list
+                        distance = point.get("distance");
+                        continue;
+                    } else if (j == 1) { // Get duration from the list
+                        duration = point.get("duration");
+                        continue;
+                    }
 
                     double lat = Double.parseDouble(point.get("lat"));
                     double lng = Double.parseDouble(point.get("lng"));
@@ -272,6 +294,9 @@ public class DirectionsFragment extends Fragment implements OnMapReadyCallback,
                 Log.d("onPostExecute","onPostExecute lineoptions decoded");
 
             }
+            Distance.setText("Distance: " + distance);
+            Duration.setText("Duration: " + duration);
+
 
             // Drawing polyline in the Google Map for the i-th route
             if(lineOptions != null) {
@@ -323,20 +348,11 @@ public class DirectionsFragment extends Fragment implements OnMapReadyCallback,
 
             }
         }
-        //coordinates of both your lattitude and longitude as well as the destinations
-        LatLng origin = new LatLng(currentLatitude, currentLongitude);
-        LatLng dest = new LatLng(destLatitude,destLongitude);
 
-        // Getting URL to the Google Directions API
-        String url = getUrl(origin, dest);
-        FetchUrl FetchUrl = new FetchUrl();
-
-        // Start downloading json data from Google Directions API
-        FetchUrl.execute(url);
 
         //move map camera
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(origin));
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(11));
+        //mMap.moveCamera(CameraUpdateFactory.newLatLng(origin));
+       // mMap.animateCamera(CameraUpdateFactory.zoomTo(11));
     }
 
     @Override
@@ -370,8 +386,8 @@ public class DirectionsFragment extends Fragment implements OnMapReadyCallback,
         // Start downloading json data from Google Directions API
         FetchUrl.execute(url);
         //move map camera
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(origin));
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(11));
+       // mMap.moveCamera(CameraUpdateFactory.newLatLng(origin));
+       // mMap.animateCamera(CameraUpdateFactory.zoomTo(11));
 
     }
 
@@ -456,6 +472,34 @@ public class DirectionsFragment extends Fragment implements OnMapReadyCallback,
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        Bundle bundle = this.getArguments();
+        String name = bundle.getString("name");
+
+        final LatLng dest = new LatLng(destLatitude,destLongitude);
+        mMap.addMarker(new MarkerOptions().position(new LatLng(destLatitude, destLongitude)).title(
+                name)).showInfoWindow();
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(dest));
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(17));
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                //coordinates of both your lattitude and longitude as well as the destinations
+                LatLng origin = new LatLng(currentLatitude, currentLongitude);
+                LatLng dest = new LatLng(destLatitude,destLongitude);
+
+                // Getting URL to the Google Directions API
+                String url = getUrl(origin, dest);
+                FetchUrl FetchUrl = new FetchUrl();
+
+                // Start downloading json data from Google Directions API
+                FetchUrl.execute(url);
+
+                mMap.moveCamera(CameraUpdateFactory.newLatLng(origin));
+                mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
+            }
+        });
 
         //Initialize Google Play Services
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
