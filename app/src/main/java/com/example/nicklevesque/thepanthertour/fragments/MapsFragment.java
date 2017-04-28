@@ -206,13 +206,13 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
                     for (int i = 0; i < academicBuildings.size() + 3; i++) {
                         academicBuildings.get(i).setVisible(true);
                     }
+                    Toast.makeText(getActivity(), "Calls Icon Click", Toast.LENGTH_SHORT).show();
                 } else {
                     for (int i = 0; i < academicBuildings.size(); i++) {
                         academicBuildings.get(i).setVisible(false);
                     }
 
                 }
-                //Toast.makeText(getActivity(), "Calls Icon Click", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.res_halls:
                 if (item.isChecked()) {

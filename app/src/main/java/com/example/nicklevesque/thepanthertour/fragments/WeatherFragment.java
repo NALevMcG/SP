@@ -2,7 +2,9 @@ package com.example.nicklevesque.thepanthertour.fragments;
 
 
 import android.app.Fragment;
+import android.graphics.Bitmap;
 import android.graphics.Typeface;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -10,6 +12,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.nicklevesque.thepanthertour.R;
@@ -30,6 +33,7 @@ public class WeatherFragment extends Fragment {
 
 
     Typeface wF;
+    RelativeLayout layout;
 
     //TextView variables to store and display our information
     TextView cF;
@@ -65,6 +69,8 @@ public class WeatherFragment extends Fragment {
         dF = (TextView)rootView.findViewById(R.id.details_field);
         cTF = (TextView)rootView.findViewById(R.id.current_temperature_field);
         wI = (TextView) rootView.findViewById(R.id.weather_icon);
+
+        layout = (RelativeLayout) rootView.findViewById(R.id.weatherbackground);
 
         wI.setTypeface(wF);
         return rootView;
@@ -129,20 +135,24 @@ public class WeatherFragment extends Fragment {
 
     /* sets weather icon based on the id given back by the JSON data we grabbed from OpenWeatherMap */
     private void setWeatherIcon(int actualId, long sunrise, long sunset){
+
         int id = actualId / 100;
         String icon = "";
         if(actualId == 800){
             long currentTime = new Date().getTime();
             if(currentTime>=sunrise && currentTime<sunset) {
                 icon = getActivity().getString(R.string.weather_sunny);
+                layout.setBackgroundResource(R.drawable.day);
             } else {
                 icon = getActivity().getString(R.string.weather_clear_night);
+                layout.setBackgroundResource(R.drawable.night);
             }
         } else {
             switch(id) {
                 case 2 : icon = getActivity().getString(R.string.weather_thunder);
                     break;
                 case 3 : icon = getActivity().getString(R.string.weather_drizzle);
+                    layout.setBackgroundResource(R.drawable.rain);
                     break;
                 case 7 : icon = getActivity().getString(R.string.weather_foggy);
                     break;
