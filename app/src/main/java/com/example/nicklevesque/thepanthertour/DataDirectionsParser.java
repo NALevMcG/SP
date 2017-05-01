@@ -85,18 +85,18 @@ public class DataDirectionsParser {
 
 
     /*
-     * Method to decode polyline points
+     * Method to decode polyline points, needed to draw routes using the google directions api
      */
-    private List<LatLng> decodePoly(String encoded) {
+    private List<LatLng> decodePoly(String enc) {
 
         List<LatLng> poly = new ArrayList<>();
-        int index = 0, len = encoded.length();
+        int index = 0, len = enc.length();
         int lat = 0, lng = 0;
 
         while (index < len) {
             int b, shift = 0, result = 0;
             do {
-                b = encoded.charAt(index++) - 63;
+                b = enc.charAt(index++) - 63;
                 result |= (b & 0x1f) << shift;
                 shift += 5;
             } while (b >= 0x20);
@@ -106,7 +106,7 @@ public class DataDirectionsParser {
             shift = 0;
             result = 0;
             do {
-                b = encoded.charAt(index++) - 63;
+                b = enc.charAt(index++) - 63;
                 result |= (b & 0x1f) << shift;
                 shift += 5;
             } while (b >= 0x20);

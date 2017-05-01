@@ -22,6 +22,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,7 +46,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static android.content.ContentValues.TAG;
+import static com.example.nicklevesque.thepanthertour.R.id.imageView3;
 import static com.example.nicklevesque.thepanthertour.R.id.toolbar;
+import static com.example.nicklevesque.thepanthertour.R.id.tv_snippet;
+import static com.example.nicklevesque.thepanthertour.R.id.tv_title;
 
 /**
  * Created by nicklevesque 3/14/17
@@ -90,6 +94,11 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
+        TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
+        mTitle.setText("Map");
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_maps, container, false);
 
@@ -316,6 +325,34 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
             buildGoogleApiClient();
             mMap.setMyLocationEnabled(true);
         }
+
+        mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+            @Override
+            public View getInfoWindow(Marker marker) {
+                return null;
+            }
+
+            @Override
+            public View getInfoContents(Marker marker) {
+                View v = getActivity().getLayoutInflater().inflate(R.layout.info_window, null);
+                TextView title = (TextView)v.findViewById(tv_title);
+                TextView snippet = (TextView)v.findViewById(tv_snippet);
+                ImageView image = (ImageView)v.findViewById(imageView3);
+
+                if(marker.getSnippet().equals("Residential Hall"))
+                    image.setImageResource(R.mipmap.house);
+                else if(marker.getSnippet().equals("Academic Hall"))
+                    image.setImageResource(R.mipmap.academic_picture);
+                else
+                    image.setImageResource(R.mipmap.restaurant_image);
+
+
+                title.setText(marker.getTitle());
+                snippet.setText(marker.getSnippet());
+
+                return v;
+            }
+        });
 
 
         //Scale images used for the map

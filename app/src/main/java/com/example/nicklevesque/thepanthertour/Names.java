@@ -14,11 +14,6 @@ public class Names {
         this.hall = hall;
     }
 
-    public String getName() {
-        return this.name;
-    }
 
-    public String getHall() {
-        return this.hall;
-    }
+
 }

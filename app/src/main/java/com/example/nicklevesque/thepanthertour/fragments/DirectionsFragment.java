@@ -14,6 +14,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -60,19 +61,19 @@ public class DirectionsFragment extends Fragment implements OnMapReadyCallback,
 
     //Initiate variables
     private GoogleMap mMap;
-    GoogleApiClient mGoogleApiClient;
-    Marker mCurrLocationMarker;
-    LocationRequest mLocationRequest;
-    SupportMapFragment mapFragment;
+    private GoogleApiClient mGoogleApiClient;
+    private Marker mCurrLocationMarker;
+    private LocationRequest mLocationRequest;
+    private SupportMapFragment mapFragment;
     private double currentLatitude;
     private double currentLongitude;
     private double destLatitude;
     private double destLongitude;
     private Button button;
-    TextView Distance;
-    TextView Duration;
+    private TextView Distance;
+    private TextView Duration;
 
-
+    /* Called to do initial creation of the fragment. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -107,6 +108,10 @@ public class DirectionsFragment extends Fragment implements OnMapReadyCallback,
         button = (Button) rootView.findViewById(R.id.routeButton);
         Distance = (TextView) rootView.findViewById(R.id.distance);
         Duration = (TextView) rootView.findViewById(R.id.duration);
+
+        Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
+        TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
+        mTitle.setText("Cool Spots");
 
         // Inflate the layout for this fragment
         return rootView;

@@ -4,15 +4,14 @@ package com.example.nicklevesque.thepanthertour.fragments;
 import android.app.Fragment;
 import android.os.Bundle;
 
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.nicklevesque.thepanthertour.R;
 import android.widget.Button;
-
-
-
+import android.widget.TextView;
 
 
 /**
@@ -33,6 +32,10 @@ public class MainFragment extends Fragment {
         final Button weatherButton = (Button) rootView.findViewById(R.id.weatherButton);
         final Button pofButton = (Button) rootView.findViewById(R.id.pofButton);
         final Button slideButton = (Button) rootView.findViewById(R.id.cButton);
+
+        Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
+        TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
+        mTitle.setText("The Plymouth Way");
 
 
         //set onClickListeners to launch different fragments when the corresponding button is pressed

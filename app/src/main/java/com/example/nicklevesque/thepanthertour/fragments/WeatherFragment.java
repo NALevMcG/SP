@@ -7,6 +7,7 @@ import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -53,6 +54,7 @@ public class WeatherFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         getActivity().setTitle(R.string.weather_title);
         super.onCreate(savedInstanceState);
+
         //custom font I imported into my project, used to create the weather symbols
         wF = Typeface.createFromAsset(getActivity().getAssets(), "fonts/weather.ttf");
         updateWeatherData("Plymouth NH");
@@ -73,6 +75,10 @@ public class WeatherFragment extends Fragment {
         layout = (RelativeLayout) rootView.findViewById(R.id.weatherbackground);
 
         wI.setTypeface(wF);
+
+        Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
+        TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
+        mTitle.setText("Weather");
         return rootView;
     }
 
@@ -150,6 +156,7 @@ public class WeatherFragment extends Fragment {
         } else {
             switch(id) {
                 case 2 : icon = getActivity().getString(R.string.weather_thunder);
+                    layout.setBackgroundResource(R.drawable.thunder);
                     break;
                 case 3 : icon = getActivity().getString(R.string.weather_drizzle);
                     layout.setBackgroundResource(R.drawable.rain);
@@ -157,10 +164,13 @@ public class WeatherFragment extends Fragment {
                 case 7 : icon = getActivity().getString(R.string.weather_foggy);
                     break;
                 case 8 : icon = getActivity().getString(R.string.weather_cloudy);
+                    layout.setBackgroundResource(R.drawable.cloudy);
                     break;
                 case 6 : icon = getActivity().getString(R.string.weather_snowy);
+                    layout.setBackgroundResource(R.drawable.snow);
                     break;
                 case 5 : icon = getActivity().getString(R.string.weather_rainy);
+                    layout.setBackgroundResource(R.drawable.rain);
                     break;
             }
         }

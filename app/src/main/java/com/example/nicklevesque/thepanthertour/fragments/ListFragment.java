@@ -3,10 +3,12 @@ package com.example.nicklevesque.thepanthertour.fragments;
 import android.app.Fragment;
 import android.os.Bundle;
 
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.ViewSwitcher;
 
 import com.example.nicklevesque.thepanthertour.R;
@@ -28,6 +30,10 @@ public class ListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
+        TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
+        mTitle.setText("Cool Spots");
         // Inflate the layout for this fragment
         final View rootView = inflater.inflate(R.layout.main_list, container, false);
         final ViewSwitcher vw = (ViewSwitcher) rootView.findViewById(R.id.simpleViewSwitcher);
@@ -36,6 +42,7 @@ public class ListFragment extends Fragment {
         final Button mountainButton = (Button) rootView.findViewById(R.id.mountainButton);
         final Button campingButton = (Button) rootView.findViewById(R.id.campingButton);
         final Button bridgeButton = (Button) rootView.findViewById(R.id.bridgeButton);
+
 
         mountainButton.setOnClickListener(new View.OnClickListener() {
 

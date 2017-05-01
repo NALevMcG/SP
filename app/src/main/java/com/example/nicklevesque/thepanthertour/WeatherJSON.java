@@ -16,9 +16,13 @@ import android.util.Log;
  */
 public class WeatherJSON {
 
+    //url
     private static final String OPEN_WEATHER_MAP_API =
             "http://api.openweathermap.org/data/2.5/weather?q=%s&units=metric";
 
+    /*method extracts JSON data from openweathermap web services  and prepares it to
+    be rendered into a ui component
+     */
     public static JSONObject getJSON(Context context, String city){
         try {
             //Connect to link above, this is where we will pull our JSON data
