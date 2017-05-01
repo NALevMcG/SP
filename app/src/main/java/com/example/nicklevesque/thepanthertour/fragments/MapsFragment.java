@@ -189,6 +189,9 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
         }
     }
 
+    /*
+    Method that clears previous and creates new option menu
+     */
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         menu.clear();
@@ -198,6 +201,9 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
 
     }
 
+    /*
+    method that handles my options menu functionality
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
@@ -209,18 +215,21 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
             item.setChecked(true);
         }
 
+        /*
+        switch statement used determine which button was clicked and to handle it accordingly
+         */
         switch (id) {
             case R.id.academic_halls:
                 if (item.isChecked()) {
                     for (int i = 0; i < academicBuildings.size() + 3; i++) {
                         academicBuildings.get(i).setVisible(true);
                     }
-                    Toast.makeText(getActivity(), "Calls Icon Click", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Academic buildings visable", Toast.LENGTH_SHORT).show();
                 } else {
                     for (int i = 0; i < academicBuildings.size(); i++) {
                         academicBuildings.get(i).setVisible(false);
                     }
-
+                    Toast.makeText(getActivity(), "Academic buildings non visible", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case R.id.res_halls:
@@ -228,12 +237,12 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
                     for (int i = 0; i < resHalls.size(); i++) {
                         resHalls.get(i).setVisible(true);
                     }
+                    Toast.makeText(getActivity(), "Residential buildings visible", Toast.LENGTH_SHORT).show();
                 } else {
                     for (int i = 0; i < resHalls.size(); i++) {
                         resHalls.get(i).setVisible(false);
                     }
-
-                    //Toast.makeText(getActivity(), "Calls Show Click", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Residential buildings non visible", Toast.LENGTH_SHORT).show();
 
                     break;
                 }
@@ -242,11 +251,12 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
                     for (int i = 0; i < dining.size(); i++) {
                         dining.get(i).setVisible(true);
                     }
+                    Toast.makeText(getActivity(), "Dining buildings visible", Toast.LENGTH_SHORT).show();
                 } else {
                     for (int i = 0; i < dining.size(); i++) {
                         dining.get(i).setVisible(false);
                     }
-
+                    Toast.makeText(getActivity(), "Dining buildings non visible", Toast.LENGTH_SHORT).show();
                     break;
                 }
         }

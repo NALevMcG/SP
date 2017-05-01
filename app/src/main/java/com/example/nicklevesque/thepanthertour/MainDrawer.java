@@ -32,6 +32,7 @@ import com.example.nicklevesque.thepanthertour.fragments.DirectionsFragment;
 import com.example.nicklevesque.thepanthertour.fragments.ListFragment;
 import com.example.nicklevesque.thepanthertour.fragments.MainFragment;
 import com.example.nicklevesque.thepanthertour.fragments.MapsFragment;
+import com.example.nicklevesque.thepanthertour.fragments.SlideShowFragment;
 import com.example.nicklevesque.thepanthertour.fragments.WeatherFragment;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.ErrorDialogFragment;
@@ -150,8 +151,10 @@ public class MainDrawer extends AppCompatActivity
         else if (id == R.id.nav_gallery) {
             fm.beginTransaction().replace(R.id.main_drawer, new MapsFragment()).addToBackStack("my_fragment").commit();
 
-        } else if (id == R.id.nav_slideshow) {
-
+        }
+        //Launches SlideShow Fragment if selected form nav bar
+        else if (id == R.id.nav_slideshow) {
+            fm.beginTransaction().replace(R.id.main_drawer, new SlideShowFragment()).addToBackStack("my_fragment").commit();
         }
         //Launches Weather Fragment if Weather is selected from the nav bar
         else if (id == R.id.weather) {
