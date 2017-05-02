@@ -225,25 +225,28 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
                         academicBuildings.get(i).setVisible(true);
                     }
                     Toast.makeText(getActivity(), "Academic buildings visable", Toast.LENGTH_SHORT).show();
+                    break;
                 } else {
                     for (int i = 0; i < academicBuildings.size(); i++) {
                         academicBuildings.get(i).setVisible(false);
                     }
                     Toast.makeText(getActivity(), "Academic buildings non visible", Toast.LENGTH_SHORT).show();
+                    break;
                 }
-                break;
+
             case R.id.res_halls:
                 if (item.isChecked()) {
                     for (int i = 0; i < resHalls.size(); i++) {
                         resHalls.get(i).setVisible(true);
                     }
                     Toast.makeText(getActivity(), "Residential buildings visible", Toast.LENGTH_SHORT).show();
+                    break;
+
                 } else {
                     for (int i = 0; i < resHalls.size(); i++) {
                         resHalls.get(i).setVisible(false);
                     }
                     Toast.makeText(getActivity(), "Residential buildings non visible", Toast.LENGTH_SHORT).show();
-
                     break;
                 }
             case R.id.dining_halls:
@@ -252,6 +255,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
                         dining.get(i).setVisible(true);
                     }
                     Toast.makeText(getActivity(), "Dining buildings visible", Toast.LENGTH_SHORT).show();
+                    break;
                 } else {
                     for (int i = 0; i < dining.size(); i++) {
                         dining.get(i).setVisible(false);

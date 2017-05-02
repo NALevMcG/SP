@@ -84,7 +84,7 @@ public class WeatherFragment extends Fragment {
 
 
 
-    /* method used to continuously update weather for specific city (Plymouth) when it is available*/
+    /* method used to continuously update weather for Plymouth when it is available*/
     private void updateWeatherData(final String city){
         new Thread(){
             public void run(){
@@ -162,6 +162,7 @@ public class WeatherFragment extends Fragment {
                     layout.setBackgroundResource(R.drawable.rain);
                     break;
                 case 7 : icon = getActivity().getString(R.string.weather_foggy);
+                    layout.setBackgroundResource(R.drawable.fog);
                     break;
                 case 8 : icon = getActivity().getString(R.string.weather_cloudy);
                     layout.setBackgroundResource(R.drawable.cloudy);

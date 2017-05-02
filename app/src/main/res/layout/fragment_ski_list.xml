@@ -1,0 +1,138 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.nicklevesque.thepanthertour.fragments.SkiListFragment">
+
+    <ScrollView
+        android:id="@+id/view2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#000000"
+            >
+
+            <Button
+                android:id="@+id/attitashski"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="casual"
+                android:text="Attitash Ski Area" />
+
+            <Button
+                android:id="@+id/brettonski"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="casual"
+                android:text="Bretton Woods Ski Area" />
+
+            <Button
+                android:id="@+id/camptonski"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="casual"
+                android:text="Campton Mountain Ski Area" />
+
+            <Button
+                android:id="@+id/cannonski"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="casual"
+                android:text="Cannon Mountain Ski Area" />
+
+            <Button
+                android:id="@+id/cranmoreski"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="casual"
+                android:text="Cranmore Ski Area" />
+
+            <Button
+                android:id="@+id/dartmouthski"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="casual"
+                android:text="Dartmouth Skiway" />
+
+            <Button
+                android:id="@+id/gunstockski"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="casual"
+                android:text="Gunstock Ski Area" />
+
+            <Button
+                android:id="@+id/kingski"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="casual"
+                android:text="King Pine Ski Area" />
+
+            <Button
+                android:id="@+id/loonski"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="casual"
+                android:text="Loon Ski Area" />
+
+            <Button
+                android:id="@+id/sunapeeski"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="casual"
+                android:text="Mount Sunapee Ski Area" />
+
+            <Button
+                android:id="@+id/patspeakski"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="casual"
+                android:text="Pats Peak Ski Area" />
+
+            <Button
+                android:id="@+id/raggedski"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="casual"
+                android:text="Ragged Mountain Ski Area" />
+
+            <Button
+                android:id="@+id/sundayriverski"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="casual"
+                android:text="Sunday River Ski Area" />
+
+            <Button
+                android:id="@+id/watervilleski"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="casual"
+                android:text="Waterville Valley Ski Area " />
+
+            <Button
+                android:id="@+id/whalebackski"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="casual"
+                android:text="Whaleback Mountain Ski Area" />
+
+
+            <Button
+                android:id="@+id/wolfski"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="casual"
+                android:text="Wolfeboro Abenaki Ski Area" />
+
+
+        </LinearLayout>
+    </ScrollView>
+
+</FrameLayout>

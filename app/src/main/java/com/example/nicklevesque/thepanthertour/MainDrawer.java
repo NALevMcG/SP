@@ -152,7 +152,7 @@ public class MainDrawer extends AppCompatActivity
             fm.beginTransaction().replace(R.id.main_drawer, new MapsFragment()).addToBackStack("my_fragment").commit();
 
         }
-        //Launches SlideShow Fragment if selected form nav bar
+        //Launches SlideShow Fragment if selected form nav bar-
         else if (id == R.id.nav_slideshow) {
             fm.beginTransaction().replace(R.id.main_drawer, new SlideShowFragment()).addToBackStack("my_fragment").commit();
         }
