@@ -6,8 +6,10 @@ import android.app.Fragment;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.location.Location;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -22,10 +24,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.nicklevesque.thepanthertour.DataDirectionsParser;
 import com.example.nicklevesque.thepanthertour.R;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -41,11 +45,23 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
 
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import static android.content.ContentValues.TAG;
+import static com.example.nicklevesque.thepanthertour.R.id.dining_halls;
 import static com.example.nicklevesque.thepanthertour.R.id.imageView3;
 import static com.example.nicklevesque.thepanthertour.R.id.toolbar;
 import static com.example.nicklevesque.thepanthertour.R.id.tv_snippet;
@@ -58,7 +74,7 @@ import static com.example.nicklevesque.thepanthertour.R.id.tv_title;
 public class MapsFragment extends Fragment implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
-        LocationListener {
+        LocationListener, GoogleMap.OnInfoWindowClickListener {
 
     //global variables
     //Map object, we use later in this class to populate a map
@@ -73,6 +89,17 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
     List<Marker> resHalls = new ArrayList<Marker>();
     List<Marker> dining = new ArrayList<Marker>();
     List<Marker> academicBuildings = new ArrayList<Marker>();
+
+    double currentLatitude;
+    double currentLongitude;
+
+    private TextView Distance;
+    private TextView Duration;
+
+    private Button button;
+    private Button button2;
+
+    Polyline polyline;
 
 
 
@@ -95,12 +122,23 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        View rootView = inflater.inflate(R.layout.fragment_maps, container, false);
+
         Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
         TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
         mTitle.setText("Map");
 
+        Distance = (TextView) rootView.findViewById(R.id.distance);
+        Duration = (TextView) rootView.findViewById(R.id.duration);
+
+        button = (Button) rootView.findViewById(R.id.routeButton);
+        button.setVisibility(View.INVISIBLE);
+        button2 = (Button) rootView.findViewById(R.id.clearButton);
+        button2.setVisibility(View.INVISIBLE);
+
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_maps, container, false);
+        return rootView;
 
     }
 
@@ -108,6 +146,8 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
         super.onViewCreated(view, savedInstanceState);
         MapFragment fragment = (MapFragment)getChildFragmentManager().findFragmentById(R.id.map);
         fragment.getMapAsync(this);
+
+
 
     }
 
@@ -263,6 +303,154 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
                     Toast.makeText(getActivity(), "Dining buildings non visible", Toast.LENGTH_SHORT).show();
                     break;
                 }
+
+
+            case R.id.rounds_hall:
+                for (int i = 0; i < academicBuildings.size() + 3; i++) {
+                    if(academicBuildings.get(i).getTitle().equals("Rounds")){
+                        mMap.moveCamera(CameraUpdateFactory.newLatLng(academicBuildings.get(i).getPosition()));
+                        return true;
+                    }
+                }
+
+            case R.id.memorial_hall:
+                for (int i = 0; i < academicBuildings.size() + 3; i++) {
+                    if(academicBuildings.get(i).getTitle().equals("Memorial")){
+                        mMap.moveCamera(CameraUpdateFactory.newLatLng(academicBuildings.get(i).getPosition()));
+                        return true;
+                    }
+                }
+            case R.id.d_m:
+                for (int i = 0; i < academicBuildings.size() + 3; i++) {
+                    if(academicBuildings.get(i).getTitle().equals("Draper & Maynard")){
+                        mMap.moveCamera(CameraUpdateFactory.newLatLng(academicBuildings.get(i).getPosition()));
+                        return true;
+                    }
+                }
+
+            case R.id.hyde_hall:
+                for (int i = 0; i < academicBuildings.size() + 3; i++) {
+                    if(academicBuildings.get(i).getTitle().equals("Hyde")){
+                        mMap.moveCamera(CameraUpdateFactory.newLatLng(academicBuildings.get(i).getPosition()));
+                        return true;
+                    }
+                }
+            case R.id.boyd_hall:
+                for (int i = 0; i < academicBuildings.size() + 3; i++) {
+                    if(academicBuildings.get(i).getTitle().equals("Boyd")){
+                        mMap.moveCamera(CameraUpdateFactory.newLatLng(academicBuildings.get(i).getPosition()));
+                        return true;
+                    }
+                }
+
+
+            case R.id.student_aps:
+                for (int i = 0; i < resHalls.size()+1; i++) {
+                    if(resHalls.get(i).getTitle().equals("Student Apartments")){
+                        mMap.moveCamera(CameraUpdateFactory.newLatLng(resHalls.get(i).getPosition()));
+                        return true;
+                    }
+                }
+
+            case R.id.non_trad_aps:
+                for (int i = 0; i < resHalls.size()+1; i++) {
+                    if(resHalls.get(i).getTitle().equals("Non-Traditional Student Apartments")){
+                        mMap.moveCamera(CameraUpdateFactory.newLatLng(resHalls.get(i).getPosition()));
+                        return true;
+                    }
+                }
+
+            case R.id.smith:
+                for (int i = 0; i < resHalls.size()+1; i++) {
+                    if(resHalls.get(i).getTitle().equals("Smith")){
+                        mMap.moveCamera(CameraUpdateFactory.newLatLng(resHalls.get(i).getPosition()));
+                        return true;
+                    }
+                }
+
+            case R.id.grafton:
+                for (int i = 0; i < resHalls.size()+1; i++) {
+                    if(resHalls.get(i).getTitle().equals("Grafton")){
+                        mMap.moveCamera(CameraUpdateFactory.newLatLng(resHalls.get(i).getPosition()));
+                        return true;
+                    }
+                }
+
+            case R.id.belknap:
+                for (int i = 0; i < resHalls.size()+1; i++) {
+                    if(resHalls.get(i).getTitle().equals("Belknap")){
+                        mMap.moveCamera(CameraUpdateFactory.newLatLng(resHalls.get(i).getPosition()));
+                        return true;
+                    }
+                }
+
+            case R.id.mary_lyon:
+                for (int i = 0; i < resHalls.size()+1; i++) {
+                    if(resHalls.get(i).getTitle().equals("Mary Lyon")){
+                        mMap.moveCamera(CameraUpdateFactory.newLatLng(resHalls.get(i).getPosition()));
+                        return true;
+                    }
+                }
+
+            case R.id.blair:
+                for (int i = 0; i < resHalls.size()+1; i++) {
+                    if(resHalls.get(i).getTitle().equals("Blair")){
+                        mMap.moveCamera(CameraUpdateFactory.newLatLng(resHalls.get(i).getPosition()));
+                        return true;
+                    }
+                }
+
+            case R.id.pemi:
+                for (int i = 0; i < resHalls.size()+1; i++) {
+                    if(resHalls.get(i).getTitle().equals("Pemi")){
+                        mMap.moveCamera(CameraUpdateFactory.newLatLng(resHalls.get(i).getPosition()));
+                        return true;
+                    }
+                }
+                break;
+
+            case R.id.langdonwoods:
+                for (int i = 0; i < resHalls.size()+1; i++) {
+                    if(resHalls.get(i).getTitle().equals("Langdon Woods")){
+                        mMap.moveCamera(CameraUpdateFactory.newLatLng(resHalls.get(i).getPosition()));
+                        return true;
+                    }
+                }
+
+            case R.id.commons_cafe:
+                for (int i = 0; i < dining.size()+1; i++) {
+                    if(dining.get(i).getTitle().equals("Commons Cafe")){
+                        mMap.moveCamera(CameraUpdateFactory.newLatLng(dining.get(i).getPosition()));
+                        return true;
+                    }
+                }
+
+            case R.id.prospect_dininghall:
+                for (int i = 0; i < dining.size()+1; i++) {
+                    if(dining.get(i).getTitle().equals("Prospect")){
+                        mMap.moveCamera(CameraUpdateFactory.newLatLng(dining.get(i).getPosition()));
+                        return true;
+                    }
+                }
+
+            case R.id.woods_cafe:
+                for (int i = 0; i < dining.size()+1; i++) {
+                    if(dining.get(i).getTitle().equals("Woods Cafe")){
+                        mMap.moveCamera(CameraUpdateFactory.newLatLng(dining.get(i).getPosition()));
+                        return true;
+                    }
+                }
+
+            case R.id.union_grille:
+                for (int i = 0; i < dining.size()+1; i++) {
+                    if(dining.get(i).getTitle().equals("Union Grill")){
+                        mMap.moveCamera(CameraUpdateFactory.newLatLng(dining.get(i).getPosition()));
+                        return true;
+                    }
+                }
+
+
+
         }
         return false;
 
@@ -274,17 +462,226 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
 
     @Override
     public void onConnected(@Nullable Bundle bundle) {
+        Location location = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+
+        LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+
+        //move map camera
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(17));
+
         mLocationRequest = new LocationRequest();
         mLocationRequest.setInterval(1000);
         mLocationRequest.setFastestInterval(1000);
         mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
+        //check to make sure we have permission to get user location
         if (ContextCompat.checkSelfPermission(getActivity(),
-                Manifest.permission.ACCESS_FINE_LOCATION)
+                android.Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
-            LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
+
+            //if permission granted check to see if we have a location, if not request one, else assign our variables to our long lat
+            if (location == null) {
+                LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
+            } else {
+                //If everything went fine lets get latitude and longitude
+                currentLatitude = location.getLatitude();
+                currentLongitude = location.getLongitude();
+                Log.e("latitude", "" + currentLatitude);
+                Log.e("longitude", "" + currentLongitude);
+
+            }
+        }
+    }
+
+    private String getUrl(LatLng origin, LatLng dest) {
+
+        // Origin of route
+        String str_origin = "origin=" + origin.latitude + "," + origin.longitude;
+
+        // Destination of route
+        String str_dest = "destination=" + dest.latitude + "," + dest.longitude;
+
+        // Sensor enabled
+        String sensor = "sensor=false";
+
+        // travel mode
+        String mode = "mode=walking";
+
+        // Building the parameters to the web service
+        String parameters = str_origin + "&" + str_dest + "&" + sensor + "&" + mode;
+
+        // Output format
+        String output = "json";
+
+        // Building the url to the web service
+        String url = "https://maps.googleapis.com/maps/api/directions/" + output + "?" + parameters;
+
+        return url;
+    }
+
+    /*
+     * A method to download json data from url
+     */
+    private String downloadUrl(String strUrl) throws IOException {
+        String data = "";
+        InputStream iStream = null;
+        HttpURLConnection urlConnection = null;
+        try {
+            URL url = new URL(strUrl);
+
+            // Creating an http connection to communicate with url
+            urlConnection = (HttpURLConnection) url.openConnection();
+
+            // Connecting to url
+            urlConnection.connect();
+
+            // Reading data from url
+            iStream = urlConnection.getInputStream();
+
+            BufferedReader br = new BufferedReader(new InputStreamReader(iStream));
+
+            StringBuffer sb = new StringBuffer();
+
+            String line = "";
+            while ((line = br.readLine()) != null) {
+                sb.append(line);
+            }
+
+            data = sb.toString();
+            Log.d("downloadUrl", data.toString());
+            br.close();
+
+        } catch (Exception e) {
+            Log.d("Exception", e.toString());
+        } finally {
+            iStream.close();
+            urlConnection.disconnect();
+        }
+        return data;
+    }
+
+    /**
+     * inner class used to fetch data from the url passed to it
+     */
+    private class FetchUrl extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... url) {
+
+            // For storing data from web service
+            String data = "";
+
+            try {
+                // Fetching the data from web service
+                data = downloadUrl(url[0]);
+                Log.d("Background Task data", data.toString());
+            } catch (Exception e) {
+                Log.d("Background Task", e.toString());
+            }
+            return data;
         }
 
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+
+            MapsFragment.ParserTask parserTask = new MapsFragment.ParserTask();
+
+            // Invokes the thread for parsing the JSON data
+            parserTask.execute(result);
+
+        }
     }
+
+    /*
+     * A class to parse the Google Places in JSON format
+     */
+    private class ParserTask extends AsyncTask<String, Integer, List<List<HashMap<String, String>>>> {
+
+        // Parsing the data in non-ui thread
+        @Override
+        protected List<List<HashMap<String, String>>> doInBackground(String... jsonData) {
+
+            JSONObject jObject;
+            List<List<HashMap<String, String>>> routes = null;
+
+            try {
+                jObject = new JSONObject(jsonData[0]);
+                Log.d("ParserTask",jsonData[0].toString());
+                DataDirectionsParser parser = new DataDirectionsParser();
+                Log.d("ParserTask", parser.toString());
+
+                // Starts parsing data
+                routes = parser.parse(jObject);
+                Log.d("ParserTask","Executing routes");
+                Log.d("ParserTask",routes.toString());
+
+            } catch (Exception e) {
+                Log.d("ParserTask",e.toString());
+                e.printStackTrace();
+            }
+            return routes;
+        }
+
+        // Executes in UI thread, after the parsing process
+        @Override
+        protected void onPostExecute(List<List<HashMap<String, String>>> result) {
+            ArrayList<LatLng> points;
+            String distance = "Blah";
+            String duration = "Blah";
+
+            PolylineOptions lineOptions = null;
+
+            // Traversing through all the routes
+            for (int i = 0; i < result.size(); i++) {
+                points = new ArrayList<>();
+                lineOptions = new PolylineOptions();
+
+                // Fetching i-th route
+                List<HashMap<String, String>> path = result.get(i);
+
+                // Fetching all the points in i-th route
+                for (int j = 0; j < path.size(); j++) {
+                    HashMap<String, String> point = path.get(j);
+
+                    if (j == 0) {    // Get distance from the list
+                        distance = point.get("distance");
+                        continue;
+                    } else if (j == 1) { // Get duration from the list
+                        duration = point.get("duration");
+                        continue;
+                    }
+
+                    double lat = Double.parseDouble(point.get("lat"));
+                    double lng = Double.parseDouble(point.get("lng"));
+                    LatLng position = new LatLng(lat, lng);
+
+                    points.add(position);
+                }
+
+                // Adding all the points in the route to LineOptions
+                lineOptions.addAll(points);
+                lineOptions.width(10);
+                lineOptions.color(Color.RED);
+
+                Log.d("onPostExecute","onPostExecute lineoptions decoded");
+
+            }
+            Distance.setText("Distance: " + distance);
+            Duration.setText("Duration: " + duration);
+
+
+            // Drawing polyline in the Google Map for the i-th route
+
+            if(lineOptions != null) {
+                polyline = mMap.addPolyline(lineOptions);
+            }
+            else {
+                Log.d("onPostExecute","without Polylines drawn");
+            }
+        }
+    }
+
 
     /*void method that is called when location is changed. When it is changed,
     We move the camera to the marker */
@@ -320,6 +717,11 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+
+        mMap.getUiSettings().setMapToolbarEnabled(false);
+
+
+        mMap.setOnInfoWindowClickListener(this);
 
         //Checks current sdk on device to see if location permission is even needed (not needed in lower sdk versions)
         // if it is, check if location permissions have been granted, if not run checkLocationPermission();
@@ -436,6 +838,68 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
         academicBuildings.add(boyd);
         academicBuildings.add(dandm);
 
+
+    }
+
+
+    public void onInfoWindowClick(final Marker marker) {
+        button.setVisibility(View.VISIBLE);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                button.setVisibility(View.INVISIBLE);
+                button2.setVisibility(View.VISIBLE);
+
+                for (int i = 0; i < academicBuildings.size(); i++) {
+                    academicBuildings.get(i).setVisible(false);
+                }
+
+                for (int i = 0; i < resHalls.size(); i++) {
+                    resHalls.get(i).setVisible(false);
+                }
+
+                for (int i = 0; i < dining.size(); i++) {
+                    dining.get(i).setVisible(false);
+                }
+
+                marker.setVisible(true);
+
+                LatLng latlng = marker.getPosition();
+                double latitude = latlng.latitude;
+                double longitude = latlng.longitude;
+
+                LatLng origin = new LatLng(currentLatitude, currentLongitude);
+                LatLng dest = new LatLng(latitude,longitude);
+
+                // Getting URL to the Google Directions API
+                String url = getUrl(origin, dest);
+                FetchUrl FetchUrl = new FetchUrl();
+
+                // Start downloading json data from Google Directions API
+                FetchUrl.execute(url);
+            }
+        });
+
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                button2.setVisibility(View.INVISIBLE);
+                polyline.remove();
+                for (int i = 0; i < academicBuildings.size(); i++) {
+                    academicBuildings.get(i).setVisible(true);
+                }
+
+                for (int i = 0; i < resHalls.size(); i++) {
+                    resHalls.get(i).setVisible(true);
+                }
+
+                for (int i = 0; i < dining.size(); i++) {
+                    dining.get(i).setVisible(true);
+                }
+
+            }
+        });
 
     }
 

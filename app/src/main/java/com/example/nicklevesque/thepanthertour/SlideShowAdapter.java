@@ -25,16 +25,27 @@ public class SlideShowAdapter extends PagerAdapter {
 
     /*array of photos used for the slideshow*/
     private int[] image_resources = {
-        R.mipmap.frontpage,
-        R.mipmap.frontpage,
-        R.mipmap.frontpage
+        R.mipmap.img_2272,
+            R.mipmap.img_2273,
+            R.mipmap.img_2274,
+            R.mipmap.img_2275,
+            R.mipmap.img_2276,
+            R.mipmap.img_2277,
+            R.mipmap.img_2278,
+            R.mipmap.img_2279,
+            R.mipmap.img_2280,
+            R.mipmap.img_2281,
+            R.mipmap.img_2282,
+            R.mipmap.img_2283,
+            R.mipmap.img_2284,
+            R.mipmap.img_2285,
+            R.mipmap.img_2286
 
     };
 
     //Constructor
-    public SlideShowAdapter(Context context, List<Names> items){
+    public SlideShowAdapter(Context context){
         this.context = context;
-        this.items = items;
     }
 
     /*Method that returns length of the images_resource array*/
@@ -59,14 +70,9 @@ public class SlideShowAdapter extends PagerAdapter {
 
         View itemView = lay.inflate(R.layout.screenshoots,container,false);
 
-        TextView topTextItem = (TextView) itemView.findViewById(R.id.textView);
-        TextView bottomTextItem = (TextView) itemView.findViewById(R.id.slideshowText);
         ImageView iv = (ImageView) itemView.findViewById(R.id.slider_image);
+        //iv.setRotation(90);
 
-        Names name = items.get(position);
-
-        topTextItem.setText(name.name);
-        bottomTextItem.setText(name.hall);
 
 
         iv.setImageResource(image_resources[position]);

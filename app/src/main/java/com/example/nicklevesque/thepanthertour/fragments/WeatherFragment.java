@@ -25,6 +25,8 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import static android.R.attr.id;
+
 /**
  * Created by ntlevesque on 3/10/17.
  *
@@ -57,7 +59,7 @@ public class WeatherFragment extends Fragment {
 
         //custom font I imported into my project, used to create the weather symbols
         wF = Typeface.createFromAsset(getActivity().getAssets(), "fonts/weather.ttf");
-        updateWeatherData("Plymouth NH");
+        updateWeatherData("plymouth nh");
     }
 
     //creates and returns the view hierarchy associated with the fragment. returns the rootView

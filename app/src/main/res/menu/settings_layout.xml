@@ -25,4 +25,115 @@
             </group>
         </menu>
     </item>
+    <item android:title="Campus">
+        <menu>
+            <group>
+                <item
+                    android:title="Academic Halls"
+                    android:id="@+id/academic_halls2"
+                     >
+                    <menu>
+                        <group>
+                            <item
+                                 android:title="Rounds Hall"
+                                 android:id="@+id/rounds_hall"
+                                />
+                            <item
+                                android:title="Memorial Hall"
+                                android:id="@+id/memorial_hall"
+                                />
+                            <item
+                                android:title="Boyd Hall"
+                                android:id="@+id/boyd_hall"
+                                />
+                            <item
+                                android:title="Hyde Hall"
+                                android:id="@+id/hyde_hall"
+                                />
+                            <item
+                                android:title="Draper and Maynard"
+                                android:id="@+id/d_m"
+                                />
+
+                        </group>
+                    </menu>
+                </item>
+
+                <item
+                    android:id="@+id/res_halls2"
+                    android:title="Residential Halls"
+                    >
+                    <menu>
+                        <group>
+                            <item
+                                android:title="Student Apartments"
+                                android:id="@+id/student_aps"
+                                />
+                            <item
+                                android:title="Non Trad Student Apartments"
+                                android:id="@+id/non_trad_aps"
+                                />
+                            <item
+                                android:title="Smith"
+                                android:id="@+id/smith"
+                                />
+                            <item
+                                android:title="Grafton"
+                                android:id="@+id/grafton"
+                                />
+                            <item
+                                android:title="Pemi"
+                                android:id="@+id/pemi"
+                                />
+                            <item
+                                android:title="Mary Lyon"
+                                android:id="@+id/mary_lyon"
+                                />
+                            <item
+                                android:title="Belknap"
+                                android:id="@+id/belknap"
+                                />
+                            <item
+                                android:title="Blair"
+                                android:id="@+id/blair"
+                                />
+                            <item
+                                android:title="Langdon Woods"
+                                android:id="@+id/langdonwoods"
+                                />
+                        </group>
+                    </menu>
+                </item>
+                <item
+                    android:id="@+id/dining_halls2"
+                    android:title="Dining Halls"
+                >
+                    <menu>
+                        <group>
+                            <item
+                                android:title="Prospect Dining Hall"
+                                android:id="@+id/prospect_dininghall"
+                                />
+                            <item
+                                android:title="Union Grille"
+                                android:id="@+id/union_grille"
+                                />
+                            <item
+                                android:title="Woods Cafe"
+                                android:id="@+id/woods_cafe"
+                                />
+                            <item
+                                android:title="Commons Cafe"
+                                android:id="@+id/commons_cafe"
+                                />
+                        </group>
+                    </menu>
+
+                </item>
+            </group>
+        </menu>
+
+
+
+    </item>
 </menu>
