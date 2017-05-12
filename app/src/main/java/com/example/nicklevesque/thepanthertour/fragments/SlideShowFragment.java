@@ -1,24 +1,18 @@
 package com.example.nicklevesque.thepanthertour.fragments;
 
 import android.app.Fragment;
-import android.content.Context;
-import android.graphics.Point;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
-import android.view.Display;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.nicklevesque.thepanthertour.Names;
 import com.example.nicklevesque.thepanthertour.R;
 import com.example.nicklevesque.thepanthertour.SlideShowAdapter;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class SlideShowFragment extends Fragment {
@@ -31,6 +25,7 @@ public class SlideShowFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
 
 
     }
@@ -46,7 +41,7 @@ public class SlideShowFragment extends Fragment {
 
         adapter = new SlideShowAdapter(getContext());
 
-        viewpager = (ViewPager)rootView.findViewById(R.id.viewPager1);
+        viewpager = (ViewPager)rootView.findViewById(R.id.viewpager1);
         viewpager.setAdapter( adapter );
 
         Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
@@ -54,6 +49,14 @@ public class SlideShowFragment extends Fragment {
         mTitle.setText("Campus Photos");
 
         return rootView;
+
+    }
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        MenuItem item= menu.findItem(R.id.action_settings);
+        item.setVisible(false);
+        super.onPrepareOptionsMenu(menu);
 
     }
 

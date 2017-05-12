@@ -21,6 +21,18 @@
                     android:checked="true"
                     android:checkable="true"
                     />
+                <item
+                    android:id="@+id/resources"
+                    android:title="Resources"
+                    android:checked="true"
+                    android:checkable="true"
+                    />
+                <item
+                    android:id="@+id/athletics"
+                    android:title="Athletics"
+                    android:checked="true"
+                    android:checkable="true"
+                    />
 
             </group>
         </menu>
@@ -125,6 +137,62 @@
                             <item
                                 android:title="Commons Cafe"
                                 android:id="@+id/commons_cafe"
+                                />
+                        </group>
+                    </menu>
+
+                </item>
+                <item
+                    android:id="@+id/athletics2"
+                    android:title="Athletics"
+                    >
+                    <menu>
+                        <group>
+                            <item
+                                android:title="Arold Field"
+                                android:id="@+id/arold_field"
+                                />
+                            <item
+                                android:title="PE Center"
+                                android:id="@+id/pe_center"
+                                />
+                            <item
+                                android:title="Practice Field"
+                                android:id="@+id/practice_field"
+                                />
+                            <item
+                                android:title="Ice Arena"
+                                android:id="@+id/ice_arena"
+                                />
+                            <item
+                                android:title="D and M Park"
+                                android:id="@+id/dandmpark"
+                                />
+                        </group>
+                    </menu>
+
+                </item>
+                <item
+                    android:id="@+id/resources2"
+                    android:title="Resources"
+                    >
+                    <menu>
+                        <group>
+                            <item
+                                android:title="Lamson Library"
+                                android:id="@+id/lamson"
+                                />
+                            <item
+                                android:title="Career Services"
+                                android:id="@+id/career"
+                                />
+                            <item
+                                android:title="Hartman Union Building"
+                                android:id="@+id/hub"
+                                />
+                            <item
+                                android:title="Plymouth State Admissions"
+                                android:id="@+id/admissions"
                                 />
                         </group>
                     </menu>

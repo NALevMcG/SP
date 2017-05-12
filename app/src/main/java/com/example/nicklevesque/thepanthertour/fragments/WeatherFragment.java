@@ -11,6 +11,8 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
@@ -56,6 +58,7 @@ public class WeatherFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         getActivity().setTitle(R.string.weather_title);
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
 
         //custom font I imported into my project, used to create the weather symbols
         wF = Typeface.createFromAsset(getActivity().getAssets(), "fonts/weather.ttf");
@@ -178,6 +181,14 @@ public class WeatherFragment extends Fragment {
             }
         }
         wI.setText(icon);
+    }
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        MenuItem item= menu.findItem(R.id.action_settings);
+        item.setVisible(false);
+        super.onPrepareOptionsMenu(menu);
+
     }
 
 

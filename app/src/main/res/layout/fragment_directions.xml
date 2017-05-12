@@ -26,6 +26,7 @@
             android:layout_gravity="left|top"
             android:orientation="vertical"
             android:background="#000000"
+            android:id="@+id/uilinear"
             >
 
             <TextView

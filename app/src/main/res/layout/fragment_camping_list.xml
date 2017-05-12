@@ -62,14 +62,14 @@ android:layout_height="match_parent">
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="casual"
-            android:text="Russel Pond Campground" />
+            android:text="Ames Brook Campground" />
 
         <Button
             android:id="@+id/russelpond"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="casual"
-            android:text="Mount Ciley Trailhead" />
+            android:text="Russel Pond Campground" />
 
         <Button
             android:id="@+id/waterestcampground"
@@ -86,44 +86,44 @@ android:layout_height="match_parent">
             android:text="Mountain Pine Campground" />
 
         <Button
-            android:id="@+id/lostRiver"
+            android:id="@+id/meredithwoods"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="casual"
-            android:text="Lost River Gorge and Boulder Caves" />
+            android:text="Meredith Woods Campground" />
         <Button
-            android:id="@+id/hubbardbrook"
+            android:id="@+id/temerack"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="casual"
-            android:text="Hubbard Brook Trailhead" />
+            android:text="Twin Teremack Family Campground" />
         <Button
-            android:id="@+id/mountmajor"
+            android:id="@+id/hackmatack"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="casual"
-            android:text="Mount Major" />
+            android:text="Hackmatack Campground" />
 
         <Button
-            android:id="@+id/mount_isreal"
+            android:id="@+id/baker"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="casual"
-            android:text="Mount Isreal Trail" />
+            android:text="Baker River Campground" />
 
         <Button
-            android:id="@+id/plymouthMountain"
+            android:id="@+id/davidsons"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="casual"
-            android:text="Plymouth Mountain" />
+            android:text="Davidson's Countryside Campground" />
 
         <Button
-            android:id="@+id/plymouthMountain"
+            android:id="@+id/clearwater"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="casual"
-            android:text="Plymouth Mountain" />
+            android:text="Clearwater Campground" />
 
 
     </LinearLayout>

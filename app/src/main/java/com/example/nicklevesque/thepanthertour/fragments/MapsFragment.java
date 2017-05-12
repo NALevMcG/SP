@@ -26,6 +26,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -89,6 +90,8 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
     List<Marker> resHalls = new ArrayList<Marker>();
     List<Marker> dining = new ArrayList<Marker>();
     List<Marker> academicBuildings = new ArrayList<Marker>();
+    List<Marker> athletics = new ArrayList<Marker>();
+    List<Marker> resources = new ArrayList<Marker>();
 
     double currentLatitude;
     double currentLongitude;
@@ -101,6 +104,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
 
     Polyline polyline;
 
+    LinearLayout layout;
 
 
     SupportMapFragment mapFragment;
@@ -130,6 +134,8 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
 
         Distance = (TextView) rootView.findViewById(R.id.distance);
         Duration = (TextView) rootView.findViewById(R.id.duration);
+        layout = (LinearLayout) rootView.findViewById(R.id.uilayout);
+        layout.setVisibility(View.INVISIBLE);
 
         button = (Button) rootView.findViewById(R.id.routeButton);
         button.setVisibility(View.INVISIBLE);
@@ -303,6 +309,34 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
                     Toast.makeText(getActivity(), "Dining buildings non visible", Toast.LENGTH_SHORT).show();
                     break;
                 }
+            case R.id.athletics:
+                if (item.isChecked()) {
+                    for (int i = 0; i < athletics.size(); i++) {
+                        athletics.get(i).setVisible(true);
+                    }
+                    Toast.makeText(getActivity(), "Athletic areas visible", Toast.LENGTH_SHORT).show();
+                    break;
+                } else {
+                    for (int i = 0; i < athletics.size(); i++) {
+                        athletics.get(i).setVisible(false);
+                    }
+                    Toast.makeText(getActivity(), "Athletic areas non visible", Toast.LENGTH_SHORT).show();
+                    break;
+                }
+            case R.id.resources:
+                if (item.isChecked()) {
+                    for (int i = 0; i < resources.size(); i++) {
+                        resources.get(i).setVisible(true);
+                    }
+                    Toast.makeText(getActivity(), "Athletic areas visible", Toast.LENGTH_SHORT).show();
+                    break;
+                } else {
+                    for (int i = 0; i < resources.size(); i++) {
+                        resources.get(i).setVisible(false);
+                    }
+                    Toast.makeText(getActivity(), "Athletic areas non visible", Toast.LENGTH_SHORT).show();
+                    break;
+                }
 
 
             case R.id.rounds_hall:
@@ -445,6 +479,78 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
                 for (int i = 0; i < dining.size()+1; i++) {
                     if(dining.get(i).getTitle().equals("Union Grill")){
                         mMap.moveCamera(CameraUpdateFactory.newLatLng(dining.get(i).getPosition()));
+                        return true;
+                    }
+                }
+
+            case R.id.lamson:
+                for (int i = 0; i < resources.size()+1; i++) {
+                    if(resources.get(i).getTitle().equals("Lamson Library")){
+                        mMap.moveCamera(CameraUpdateFactory.newLatLng(resources.get(i).getPosition()));
+                        return true;
+                    }
+                }
+
+            case R.id.career:
+                for (int i = 0; i < resources.size()+1; i++) {
+                    if(resources.get(i).getTitle().equals("Career Services")){
+                        mMap.moveCamera(CameraUpdateFactory.newLatLng(resources.get(i).getPosition()));
+                        return true;
+                    }
+                }
+
+            case R.id.hub:
+                for (int i = 0; i < resources.size()+1; i++) {
+                    if(resources.get(i).getTitle().equals("Hartman Union Building")){
+                        mMap.moveCamera(CameraUpdateFactory.newLatLng(resources.get(i).getPosition()));
+                        return true;
+                    }
+                }
+
+            case R.id.admissions:
+                for (int i = 0; i < resources.size()+1; i++) {
+                    if(resources.get(i).getTitle().equals("Plymouth State Admissions")){
+                        mMap.moveCamera(CameraUpdateFactory.newLatLng(resources.get(i).getPosition()));
+                        return true;
+                    }
+                }
+
+            case R.id.arold_field:
+                for (int i = 0; i < athletics.size()+1; i++) {
+                    if(athletics.get(i).getTitle().equals("Arold Field")){
+                        mMap.moveCamera(CameraUpdateFactory.newLatLng(athletics.get(i).getPosition()));
+                        return true;
+                    }
+                }
+
+            case R.id.practice_field:
+                for (int i = 0; i < athletics.size()+1; i++) {
+                    if(athletics.get(i).getTitle().equals("Practice Field")){
+                        mMap.moveCamera(CameraUpdateFactory.newLatLng(athletics.get(i).getPosition()));
+                        return true;
+                    }
+                }
+
+            case R.id.ice_arena:
+                for (int i = 0; i < athletics.size()+1; i++) {
+                    if(athletics.get(i).getTitle().equals("Ice Arena")){
+                        mMap.moveCamera(CameraUpdateFactory.newLatLng(athletics.get(i).getPosition()));
+                        return true;
+                    }
+                }
+
+            case R.id.pe_center:
+                for (int i = 0; i < athletics.size()+1; i++) {
+                    if(athletics.get(i).getTitle().equals("Physical Education Center")){
+                        mMap.moveCamera(CameraUpdateFactory.newLatLng(athletics.get(i).getPosition()));
+                        return true;
+                    }
+                }
+
+            case R.id.dandmpark:
+                for (int i = 0; i < athletics.size()+1; i++) {
+                    if(athletics.get(i).getTitle().equals("D&M Park")){
+                        mMap.moveCamera(CameraUpdateFactory.newLatLng(athletics.get(i).getPosition()));
                         return true;
                     }
                 }
@@ -687,7 +793,9 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
     We move the camera to the marker */
     @Override
     public void onLocationChanged(Location location) {
-        mLastLocation = location;
+
+        currentLongitude = location.getLongitude();
+        currentLatitude = location.getLongitude();
 
         //Place current location marker
         LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
@@ -756,11 +864,15 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
                 ImageView image = (ImageView)v.findViewById(imageView3);
 
                 if(marker.getSnippet().equals("Residential Hall"))
-                    image.setImageResource(R.mipmap.house);
+                    image.setImageResource(R.mipmap.houses);
                 else if(marker.getSnippet().equals("Academic Hall"))
                     image.setImageResource(R.mipmap.academic_picture);
+                else if(marker.getSnippet().equals("Resources"))
+                    image.setImageResource(R.mipmap.helpicon);
+                else if(marker.getSnippet().equals("Dining Area"))
+                    image.setImageResource(R.mipmap.restaurant_images);
                 else
-                    image.setImageResource(R.mipmap.restaurant_image);
+                    image.setImageResource(R.mipmap.sport);
 
 
                 title.setText(marker.getTitle());
@@ -773,12 +885,12 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
 
         //Scale images used for the map
         //restaurant image
-        BitmapDrawable bitmapdraw = (BitmapDrawable)getResources().getDrawable(R.mipmap.restaurant_image);
+        BitmapDrawable bitmapdraw = (BitmapDrawable)getResources().getDrawable(R.mipmap.restaurant_images);
         Bitmap a = bitmapdraw.getBitmap();
         Bitmap smalldiningMarker = Bitmap.createScaledBitmap(a, 50, 50, false);
 
         //housing image
-        BitmapDrawable bitmap2draw = (BitmapDrawable)getResources().getDrawable(R.mipmap.house);
+        BitmapDrawable bitmap2draw = (BitmapDrawable)getResources().getDrawable(R.mipmap.houses);
         Bitmap b = bitmap2draw.getBitmap();
         Bitmap smallreshallMarker = Bitmap.createScaledBitmap(b, 50, 50, false);
 
@@ -786,6 +898,16 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
         BitmapDrawable bitmap3draw = (BitmapDrawable)getResources().getDrawable(R.mipmap.academic_picture);
         Bitmap c = bitmap3draw.getBitmap();
         Bitmap smallacademicMarker = Bitmap.createScaledBitmap(c, 50, 50, false);
+
+        //academic image
+        BitmapDrawable bitmap4draw = (BitmapDrawable)getResources().getDrawable(R.mipmap.helpicon);
+        Bitmap d = bitmap4draw.getBitmap();
+        Bitmap smallhelpMarker = Bitmap.createScaledBitmap(d, 50, 50, false);
+
+        //academic image
+        BitmapDrawable bitmap5draw = (BitmapDrawable)getResources().getDrawable(R.mipmap.sport);
+        Bitmap e = bitmap5draw.getBitmap();
+        Bitmap smallsportsMarker = Bitmap.createScaledBitmap(e, 50, 50, false);
 
 
 
@@ -838,6 +960,29 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
         academicBuildings.add(boyd);
         academicBuildings.add(dandm);
 
+        Marker dandmpark = mMap.addMarker(new MarkerOptions().position(new LatLng(43.760767, -71.683043)).title("D&M Park").snippet("Athletics").icon(BitmapDescriptorFactory.fromBitmap(smallsportsMarker)));
+        Marker aroldpark = mMap.addMarker(new MarkerOptions().position(new LatLng(43.760767, -71.681553)).title("Arold Field").snippet("Athletics").icon(BitmapDescriptorFactory.fromBitmap(smallsportsMarker)));
+        Marker pecenter = mMap.addMarker(new MarkerOptions().position(new LatLng(43.761682, -71.682090)).title("Physical Education Center").snippet("Athletics").icon(BitmapDescriptorFactory.fromBitmap(smallsportsMarker)));
+        Marker icearena = mMap.addMarker(new MarkerOptions().position(new LatLng(43.759332, -71.682961)).title("Ice Arena").snippet("Athletics").icon(BitmapDescriptorFactory.fromBitmap(smallsportsMarker)));
+        Marker practicefield = mMap.addMarker(new MarkerOptions().position(new LatLng(43.757156, -71.681087)).title("Practice Field").snippet("Athletics").icon(BitmapDescriptorFactory.fromBitmap(smallsportsMarker)));
+
+        athletics.add(dandmpark);
+        athletics.add(aroldpark);
+        athletics.add(pecenter);
+        athletics.add(icearena);
+        athletics.add(practicefield);
+
+        Marker admissions = mMap.addMarker(new MarkerOptions().position(new LatLng(43.757200, -71.690396)).title("Plymouth State Admissions").snippet("Resources").icon(BitmapDescriptorFactory.fromBitmap(smallhelpMarker)));
+        Marker library = mMap.addMarker(new MarkerOptions().position(new LatLng(43.757423, -71.690780)).title("Lamson Library").snippet("Resources").icon(BitmapDescriptorFactory.fromBitmap(smallhelpMarker)));
+        Marker hub = mMap.addMarker(new MarkerOptions().position(new LatLng(43.759845, -71.690116)).title("Hartman Union Building").snippet("Resources").icon(BitmapDescriptorFactory.fromBitmap(smallhelpMarker)));
+        Marker career = mMap.addMarker(new MarkerOptions().position(new LatLng(43.760203, -71.687113)).title("Career Services").snippet("Resources").icon(BitmapDescriptorFactory.fromBitmap(smallhelpMarker)));
+
+        resources.add(admissions);
+        resources.add(library);
+        resources.add(hub);
+        resources.add(career);
+
+
 
     }
 
@@ -850,6 +995,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
             public void onClick(View v) {
                 button.setVisibility(View.INVISIBLE);
                 button2.setVisibility(View.VISIBLE);
+                layout.setVisibility(View.VISIBLE);
 
                 for (int i = 0; i < academicBuildings.size(); i++) {
                     academicBuildings.get(i).setVisible(false);
@@ -861,6 +1007,13 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
 
                 for (int i = 0; i < dining.size(); i++) {
                     dining.get(i).setVisible(false);
+                }
+                for (int i = 0; i < athletics.size(); i++) {
+                    athletics.get(i).setVisible(false);
+                }
+
+                for (int i = 0; i < resources.size(); i++) {
+                    resources.get(i).setVisible(false);
                 }
 
                 marker.setVisible(true);
@@ -885,6 +1038,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
             @Override
             public void onClick(View v) {
                 button2.setVisibility(View.INVISIBLE);
+                layout.setVisibility(View.INVISIBLE);
                 polyline.remove();
                 for (int i = 0; i < academicBuildings.size(); i++) {
                     academicBuildings.get(i).setVisible(true);

@@ -112,19 +112,18 @@
                 android:text="Mount Isreal Trail" />
 
             <Button
-                android:id="@+id/plymouthMountain"
+                android:id="@+id/quincy"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="casual"
-                android:text="Plymouth Mountain" />
+                android:text="Quincy Bog Trail" />
 
             <Button
-                android:id="@+id/plymouthMountain"
+                android:id="@+id/threepondtrail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="casual"
-                android:text="Plymouth Mountain" />
-
+                android:text="Three Ponds Trail" />
 
         </LinearLayout>
     </ScrollView>

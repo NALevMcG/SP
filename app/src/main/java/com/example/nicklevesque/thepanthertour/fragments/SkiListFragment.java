@@ -5,6 +5,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -23,6 +25,7 @@ public class SkiListFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
 
     }
 
@@ -203,8 +206,8 @@ public class SkiListFragment extends Fragment {
                 DirectionsFragment ldf = new DirectionsFragment ();
                 Bundle args = new Bundle();
                 //Pass Long and Lat of polar caves to DirectionsFragment
-                args.putDouble("latitude", 43.6115266);
-                args.putDouble("longitude", -71.2991468);
+                args.putDouble("latitude", 43.611513);
+                args.putDouble("longitude", -71.229151);
                 args.putString("name", "Wolfeboro Abenaki Ski Area");
 
                 ldf.setArguments(args);
@@ -340,6 +343,13 @@ public class SkiListFragment extends Fragment {
 
     }
 
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        MenuItem item= menu.findItem(R.id.action_settings);
+        item.setVisible(false);
+        super.onPrepareOptionsMenu(menu);
+
+    }
 
 
 }

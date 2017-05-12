@@ -17,9 +17,12 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -72,6 +75,7 @@ public class DirectionsFragment extends Fragment implements OnMapReadyCallback,
     private Button button;
     private TextView Distance;
     private TextView Duration;
+    private LinearLayout layout;
 
     /* Called to do initial creation of the fragment. */
     @Override
@@ -96,6 +100,7 @@ public class DirectionsFragment extends Fragment implements OnMapReadyCallback,
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         mapFragment = SupportMapFragment.newInstance();
         mapFragment.getMapAsync(this);
+        setHasOptionsMenu(true);
 
 
 
@@ -108,6 +113,8 @@ public class DirectionsFragment extends Fragment implements OnMapReadyCallback,
         button = (Button) rootView.findViewById(R.id.routeButton);
         Distance = (TextView) rootView.findViewById(R.id.distance);
         Duration = (TextView) rootView.findViewById(R.id.duration);
+        layout = (LinearLayout) rootView.findViewById(R.id.uilinear);
+        layout.setVisibility(View.INVISIBLE);
 
         Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
         TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
@@ -332,9 +339,9 @@ public class DirectionsFragment extends Fragment implements OnMapReadyCallback,
         Location location = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
         //create a new LocationRequest and request location updates every given interval
         mLocationRequest = new LocationRequest();
-        mLocationRequest.setInterval(1000);
-        mLocationRequest.setFastestInterval(1000);
-        mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
+        mLocationRequest.setInterval(10000);
+        mLocationRequest.setFastestInterval(5000);
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
         //check to make sure we have permission to get user location
         if (ContextCompat.checkSelfPermission(getActivity(),
                 android.Manifest.permission.ACCESS_FINE_LOCATION)
@@ -491,6 +498,7 @@ public class DirectionsFragment extends Fragment implements OnMapReadyCallback,
             public void onClick(View v) {
 
                 button.setVisibility(View.INVISIBLE);
+                layout.setVisibility(View.VISIBLE);
                 //coordinates of both your lattitude and longitude as well as the destinations
                 LatLng origin = new LatLng(currentLatitude, currentLongitude);
                 LatLng dest = new LatLng(destLatitude,destLongitude);
@@ -522,6 +530,14 @@ public class DirectionsFragment extends Fragment implements OnMapReadyCallback,
         }
 
 
+
+    }
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        MenuItem item= menu.findItem(R.id.action_settings);
+        item.setVisible(false);
+        super.onPrepareOptionsMenu(menu);
 
     }
 

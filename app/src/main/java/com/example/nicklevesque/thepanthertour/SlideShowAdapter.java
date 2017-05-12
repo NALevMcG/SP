@@ -20,7 +20,6 @@ import java.util.List;
 public class SlideShowAdapter extends PagerAdapter {
 
     //instantiate variables
-    private List<Names> items;
     private Context context;
 
     /*array of photos used for the slideshow*/
@@ -36,7 +35,6 @@ public class SlideShowAdapter extends PagerAdapter {
             R.mipmap.img_2280,
             R.mipmap.img_2281,
             R.mipmap.img_2282,
-            R.mipmap.img_2283,
             R.mipmap.img_2284,
             R.mipmap.img_2285,
             R.mipmap.img_2286
@@ -71,7 +69,7 @@ public class SlideShowAdapter extends PagerAdapter {
         View itemView = lay.inflate(R.layout.screenshoots,container,false);
 
         ImageView iv = (ImageView) itemView.findViewById(R.id.slider_image);
-        //iv.setRotation(90);
+        iv.setRotation(90);
 
 
 

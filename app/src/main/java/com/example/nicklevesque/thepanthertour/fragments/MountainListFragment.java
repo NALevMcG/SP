@@ -5,6 +5,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -18,6 +20,8 @@ public class MountainListFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+
 
     }
 
@@ -42,6 +46,9 @@ public class MountainListFragment extends Fragment {
         final Button ht = (Button) rootView.findViewById(R.id.hubbardbrook);
         final Button mm = (Button) rootView.findViewById(R.id.mountmajor);
         final Button mi = (Button) rootView.findViewById(R.id.mount_isreal);
+        final Button qb = (Button) rootView.findViewById(R.id.quincy);
+        final Button tpt = (Button) rootView.findViewById(R.id.threepondtrail);
+
 
 
 
@@ -293,10 +300,53 @@ public class MountainListFragment extends Fragment {
             }
         });
 
+        qb.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+                DirectionsFragment ldf = new DirectionsFragment ();
+                Bundle args = new Bundle();
+                //Pass Long and Lat of the lost river to DirectionsFragment
+                args.putString("name", "Quincy Bog Trail");
+                args.putDouble("latitude", 43.790974);
+                args.putDouble("longitude", -71.776025);
+                ldf.setArguments(args);
+
+                getFragmentManager().beginTransaction().replace(R.id.main_drawer, ldf).addToBackStack("my_fragment").commit();
+
+            }
+        });
+
+        tpt.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+                DirectionsFragment ldf = new DirectionsFragment ();
+                Bundle args = new Bundle();
+                //Pass Long and Lat of the lost river to DirectionsFragment
+                args.putString("name", "Three Ponds Trail");
+                args.putDouble("latitude", 43.885416);
+                args.putDouble("longitude", -71.795884);
+                ldf.setArguments(args);
+
+                getFragmentManager().beginTransaction().replace(R.id.main_drawer, ldf).addToBackStack("my_fragment").commit();
+
+            }
+        });
+
+
 
 
 
         return rootView;
+
+    }
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        MenuItem item= menu.findItem(R.id.action_settings);
+        item.setVisible(false);
+        super.onPrepareOptionsMenu(menu);
 
     }
 

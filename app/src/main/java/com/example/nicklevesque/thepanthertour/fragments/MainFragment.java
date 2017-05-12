@@ -6,6 +6,8 @@ import android.os.Bundle;
 
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -25,6 +27,7 @@ public class MainFragment extends Fragment {
     //creates and returns the view hierarchy associated with the fragment. returns the rootView
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState ){
 
+        setHasOptionsMenu(true);
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
 
         //Create variables for your button
@@ -36,6 +39,7 @@ public class MainFragment extends Fragment {
         Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
         TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
         mTitle.setText("The Plymouth Way");
+
 
 
         //set onClickListeners to launch different fragments when the corresponding button is pressed
@@ -78,6 +82,14 @@ public class MainFragment extends Fragment {
 
 
         return rootView;
+
+    }
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        MenuItem item= menu.findItem(R.id.action_settings);
+        item.setVisible(false);
+        super.onPrepareOptionsMenu(menu);
 
     }
 

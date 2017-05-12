@@ -5,6 +5,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -22,6 +24,8 @@ public class CampingListFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+
 
     }
 
@@ -41,10 +45,12 @@ public class CampingListFragment extends Fragment {
         final Button rp = (Button) rootView.findViewById(R.id.russelpond);
         final Button wc = (Button) rootView.findViewById(R.id.waterestcampground);
         final Button mpc = (Button) rootView.findViewById(R.id.mountainpine);
-        final Button lrg = (Button) rootView.findViewById(R.id.lostRiver);
-        final Button ht = (Button) rootView.findViewById(R.id.hubbardbrook);
-        final Button mm = (Button) rootView.findViewById(R.id.mountmajor);
-        final Button mi = (Button) rootView.findViewById(R.id.mount_isreal);
+        final Button lrg = (Button) rootView.findViewById(R.id.meredithwoods);
+        final Button ht = (Button) rootView.findViewById(R.id.temerack);
+        final Button mm = (Button) rootView.findViewById(R.id.davidsons);
+        final Button mi = (Button) rootView.findViewById(R.id.clearwater);
+        final Button b = (Button) rootView.findViewById(R.id.baker);
+        final Button h = (Button) rootView.findViewById(R.id.hackmatack);
 
 
         /*
@@ -233,9 +239,9 @@ public class CampingListFragment extends Fragment {
                 DirectionsFragment ldf = new DirectionsFragment ();
                 Bundle args = new Bundle();
                 //Pass Long and Lat of the lost river to DirectionsFragment
-                args.putString("name", "The Lost River");
-                args.putDouble("latitude", 44.0272012);
-                args.putDouble("longitude", -71.8064888);
+                args.putString("name", "Meredith Woods Campground ");
+                args.putDouble("latitude", 43.624247);
+                args.putDouble("longitude", -71.580640);
                 ldf.setArguments(args);
 
                 getFragmentManager().beginTransaction().replace(R.id.main_drawer, ldf).addToBackStack("my_fragment").commit();
@@ -250,9 +256,9 @@ public class CampingListFragment extends Fragment {
                 DirectionsFragment ldf = new DirectionsFragment ();
                 Bundle args = new Bundle();
                 //Pass Long and Lat of the lost river to DirectionsFragment
-                args.putString("name", "Hubbard Trail");
-                args.putDouble("latitude", 43.946319);
-                args.putDouble("longitude", -71.789088);
+                args.putString("name", "Twin Tamarack Family Campground ");
+                args.putDouble("latitude", 43.622083);
+                args.putDouble("longitude", -71.589269);
                 ldf.setArguments(args);
 
                 getFragmentManager().beginTransaction().replace(R.id.main_drawer, ldf).addToBackStack("my_fragment").commit();
@@ -267,9 +273,9 @@ public class CampingListFragment extends Fragment {
                 DirectionsFragment ldf = new DirectionsFragment ();
                 Bundle args = new Bundle();
                 //Pass Long and Lat of the lost river to DirectionsFragment
-                args.putString("name", "Mount Major");
-                args.putDouble("latitude", 43.509879);
-                args.putDouble("longitude",  -71.272889);
+                args.putString("name", "Davidson's Countryside Campground");
+                args.putDouble("latitude", 43.610146);
+                args.putDouble("longitude", -71.667934);
                 ldf.setArguments(args);
 
                 getFragmentManager().beginTransaction().replace(R.id.main_drawer, ldf).addToBackStack("my_fragment").commit();
@@ -284,9 +290,43 @@ public class CampingListFragment extends Fragment {
                 DirectionsFragment ldf = new DirectionsFragment ();
                 Bundle args = new Bundle();
                 //Pass Long and Lat of the lost river to DirectionsFragment
-                args.putString("name", "Mount Isreal Trail");
-                args.putDouble("latitude", 43.828551);
-                args.putDouble("longitude",  -71.484716);
+                args.putString("name", "Clearwater Campground");
+                args.putDouble("latitude", 43.6140998);
+                args.putDouble("longitude",-71.6097642);
+                ldf.setArguments(args);
+
+                getFragmentManager().beginTransaction().replace(R.id.main_drawer, ldf).addToBackStack("my_fragment").commit();
+
+            }
+        });
+
+        b.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+                DirectionsFragment ldf = new DirectionsFragment ();
+                Bundle args = new Bundle();
+                //Pass Long and Lat of the lost river to DirectionsFragment
+                args.putString("name", "Baker River Campground");
+                args.putDouble("latitude", 43.787803);
+                args.putDouble("longitude",-71.7942929);
+                ldf.setArguments(args);
+
+                getFragmentManager().beginTransaction().replace(R.id.main_drawer, ldf).addToBackStack("my_fragment").commit();
+
+            }
+        });
+
+        b.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+                DirectionsFragment ldf = new DirectionsFragment ();
+                Bundle args = new Bundle();
+                //Pass Long and Lat of the lost river to DirectionsFragment
+                args.putString("name", "Hackmatack Campground");
+                args.putDouble("latitude", 43.6183007);
+                args.putDouble("longitude",-71.4989635);
                 ldf.setArguments(args);
 
                 getFragmentManager().beginTransaction().replace(R.id.main_drawer, ldf).addToBackStack("my_fragment").commit();
@@ -297,7 +337,16 @@ public class CampingListFragment extends Fragment {
 
 
 
+
         return rootView;
+
+    }
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        MenuItem item= menu.findItem(R.id.action_settings);
+        item.setVisible(false);
+        super.onPrepareOptionsMenu(menu);
 
     }
 
